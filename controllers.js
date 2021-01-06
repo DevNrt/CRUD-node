@@ -11,7 +11,7 @@ function insert(req,res){
 
     console.log(req.body)
 
-    const sqlInsert = "INSERT INTO vulns (idnessus,cve,name,description,advice,referencias,csv) VALUES ('"+req.body.idnessus+"','"+req.body.cve+"','"+req.body.name+"','"+req.body.description+"','"+req.body.advice+"','"+req.body.referencias+"','"+req.body.csv+"')"
+    const sqlInsert = "INSERT INTO vulns (idnessus,cve,name,description,advice,referencias,csv,cliente) VALUES ('"+req.body.idnessus+"','"+req.body.cve+"','"+req.body.name+"','"+req.body.description+"','"+req.body.advice+"','"+req.body.referencias+"','"+req.body.csv+"','"+req.body.cliente+"')"
 
     db.query(sqlInsert, (err, result) => {
 
@@ -38,7 +38,7 @@ function select(req,res){
 }
 
 function update(req,res){
-    const sqlUpdate = "UPDATE vulns SET idnessus='"+req.body.idnessus+"' , cve='"+req.body.cve+"', name='"+req.body.name+"', description='"+req.body.description+"', advice='"+req.body.advice+"', referencias='"+req.body.referencias+"', csv='"+req.body.csv+"' WHERE idvulns='"+req.body.idvulns+"'"
+    const sqlUpdate = "UPDATE vulns SET idnessus='"+req.body.idnessus+"' , cve='"+req.body.cve+"', name='"+req.body.name+"', description='"+req.body.description+"', advice='"+req.body.advice+"', referencias='"+req.body.referencias+"', csv='"+req.body.csv+"', cliente='"+req.body.cliente+"' WHERE idvulns='"+req.body.idvulns+"'"
     db.query(sqlUpdate, (err,result) => {
 
         if(err){
