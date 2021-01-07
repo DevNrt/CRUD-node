@@ -1,16 +1,7 @@
-const mysql = require('mysql')
-
-const db = mysql.createPool({
-    host:"localhost",
-    user:"root",
-    password:"root",
-    database:"vulnerabilities"
-});
+const db = require('../config/db')
 
 function insert(req,res){
-
-    console.log(req.body)
-
+    
     const sqlInsert = "INSERT INTO vulns (idnessus,cve,name,description,advice,referencias,csv,cliente) VALUES ('"+req.body.idnessus+"','"+req.body.cve+"','"+req.body.name+"','"+req.body.description+"','"+req.body.advice+"','"+req.body.referencias+"','"+req.body.csv+"','"+req.body.cliente+"')"
 
     db.query(sqlInsert, (err, result) => {

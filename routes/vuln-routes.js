@@ -1,6 +1,6 @@
 const express = require('express')
 const api = express.Router()
-const vulncontrollers = require('./controllers')
+const vulncontrollers = require('../controllers/vuln-controller')
 
 api.post("/insert",vulncontrollers.insert)
 api.get("/select",vulncontrollers.select)
