@@ -24,7 +24,7 @@ function login(req,res){
 function insertLogin(req,res){
     //capturo variable
     //encriptar va antes del query
-    const sqlInsert = "INSERT INTO vulns (idnessus,cve,name,description,advice,referencias,csv,cliente) VALUES ('"+req.body.idnessus+"','"+req.body.cve+"','"+req.body.name+"','"+req.body.description+"','"+req.body.advice+"','"+req.body.referencias+"','"+req.body.csv+"','"+req.body.cliente+"')"
+    const sqlInsert = "INSERT INTO users (username,password) VALUES ('"+req.body.username+"','"+req.body.password+"')"
 
     db.query(sqlInsert, (err, result) => {
 
