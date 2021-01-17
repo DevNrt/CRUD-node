@@ -5,12 +5,12 @@ function insert(req,res){
     const sqlInsert = "INSERT INTO vulns (idnessus,cve,name,description,advice,referencias,csv,cliente) VALUES ('"+req.body.idnessus+"','"+req.body.cve+"','"+req.body.name+"','"+req.body.description+"','"+req.body.advice+"','"+req.body.referencias+"','"+req.body.csv+"','"+req.body.cliente+"')"
 
     db.query(sqlInsert, (err, result) => {
-
-    if(err){
-        res.send(err)
-    } else{
-        res.send("True")
-    }
+        if(err){
+            res.status(403).send(err)
+        } else{
+            res.send("True")
+        }
+    
 
     })
 }
@@ -21,7 +21,7 @@ function select(req,res){
     db.query(sqlSelect, (err,result) => {
 
         if(err){
-            res.send(err)
+            res.status(404).send(err)
         } else{
             res.send(result)
         }
@@ -33,7 +33,7 @@ function update(req,res){
     db.query(sqlUpdate, (err,result) => {
 
         if(err){
-            res.send(err)
+            res.status(403).send(err)
         } else{
             res.send('True')
         }
@@ -45,7 +45,7 @@ function drop(req,res){
     db.query(sqlDelete, (err,result) => {
 
         if(err){
-            res.send(err)
+            res.status(403).send(err)
         } else{
             res.send('True')
         }
@@ -57,7 +57,7 @@ function selectbyid(req,res){
     db.query(sqlSelect, (err,result) => {
 
         if(err){
-            res.send(err)
+            res.status(404).send(err)
         } else{
             res.send(result)
         }
