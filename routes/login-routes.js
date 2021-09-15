@@ -6,3 +6,4 @@ api.post("/login",logincontrollers.login)
 api.post("/insertLogin",logincontrollers.insertLogin)
 
 module.exports = api
+
