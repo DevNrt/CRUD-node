@@ -13,74 +13,47 @@ function login(req, res) {
             if (result.length == 0) {
                 res.status(400).send('Datos incorrectos')
             } else {
-                bcrypt.compare(req.body.pass, result[0].pass, function (err, data) {
-                    if (data == true) {
-                        const user = {
-                            username: req.body.username,
-                            pass: req.body.pass
-                        }
-                        jwt.sign({ user: user }, 'Q1az &yHN 9oL', (err, token) => {
-                            if (err) {
-                                res.status(403);
-                            } else {
-                                jwt.verify(token, 'Q1az &yHN 9oL', (err, authData) => {
-                                    if (err) {
-                                        res.status(403);
-                                    } else {
-                                        res.status(200).send({
-                                            token: token,
-                                            status: '200',
-                                            text: 'Usuario encontrado'
-                                        })
-                                    }
-                                })
-                            }
-                        })
-                    } else {
-                        res.status(400).send('Datos incorrectos');
-                    }
-                });
-            }
-        }
-    })
+                    res.status(200).send({
+                        status: '200',
+                        text: 'Usuario encontrado'
+                    })
 
+            }
+    }
 }
+)}
+
+
+
 
 function insertLogin(req, res) {
-    const pass = req.body.pass
-    bcrypt.hash(pass, 10, function (err, data) {
-        if (data) {
-            const verify = "SELECT idusers FROM vulnerabilities.users"
-            const sqlInsert = "INSERT INTO users (username,pass) VALUES ('" + req.body.username + "','" + data + "')"
+
+            const verify = "SELECT idusers FROM calculo.users"
+
 
             db.query(verify, (err, result) => {
-                console.log(result.length)
-                if (result.length >= 3) {
-                    res.send("Maximo 3 usuarios")
-                } else {
-                    db.query(sqlInsert, (err, result) => {
-                        if (err) {
-                            res.send(err)
-                        } else {
-                            res.send("True")
-                        }
+                let id = (result.length) + 1;
+                const sqlInsert = "INSERT INTO calculo.users (idusers,username,pass) VALUES ('" + id + "','" + req.body.username + "','" + req.body.pass + "')"
+                db.query(sqlInsert, (err, result) => {
+                    if (err) {
+                        res.send("false")
+                    } else {
+                        res.send("True")
+                    }
 
-                    })
-                }
+                })
+
             })
 
-        } else {
-            res.send(err)
+
+
+
         }
-    });
-
-
-}
 
 
 
 
-module.exports = {
-    login,
-    insertLogin
-}
+        module.exports = {
+            login,
+            insertLogin
+        }
